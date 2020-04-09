@@ -79,3 +79,33 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * System for passing data from parent to child component
     * Customize/configure child component
 * When passing component as prop into another component (I.e., rendering a component between open and closing tags of parent component), it shows up under children property of props object 
+
+### **Section 4: Structuring Apps with Class-Based Components**
+**Completed:** 04/09/2020
+
+**Related Project:** [Seasons](projects/seasons)
+* NOTE: Seasons project still in progress
+
+**Lessons Learned:** 
+* Class based components used to: 
+    * Manage feedback from the user, or systems within app
+    * Update & re-render components 
+* Class components:
+    * Help organize code
+    * Are stateful
+    * Understand lifecycle events 
+    * REMINDER: Hooks will be covered later in course
+* [Mozilla's Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) to get user's current location 
+* Workaround / manually set location under console menu -> Sensors -> Geolocation override drop down -> select default location
+* Reset Geolocation preferences to test users who deny location confirmation - i icon left of browser address -> Location -> Dropdown: Ask, Allow, or Deny
+* Timeline of stateless function based Seasons App (demonstrating need for stateful Class based components to handle results of async operation):
+    * JS loaded by browser
+    * App component rendered
+    * We call geolocation (async operation!!!)
+    * App returns JSX, gets rendered as HTML
+    * We get results of geolocation (AFTER everything has been rendered!!!)
+* With stateful Class based component, we want to re-render component with result from geolocation call
+* Rules of Class based component:
+    * Must be JavaScript class
+    * Must extend subclass React.Components 
+    * Must define a render method that returns JSX
