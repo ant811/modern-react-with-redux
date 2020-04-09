@@ -3,6 +3,10 @@
 > This JavaScript course was created by [Stephen Grider](https://github.com/StephenGrider) for Udemy.  
 > Sign up at [Modern React with Redux [2020 Update]](https://www.udemy.com/course/react-redux/).
 
+<h1 align="center">
+  <img src="https://udemy-images.udemy.com/course/750x422/705264_caa9_3.jpg" style="max-width:100%" alt="modernReactRedux" />
+</h1>
+
 Greetings!  
 
 This repository tracks my progress and lessons learned on the Udemy course Modern React with Redux by Stephen Grider.
@@ -33,6 +37,8 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 ### **Section 2: Building Content with JSX**
 **Completed:** 04/08/2020
 
+**Related Project:** [JSX](projects/jsx)
+
 **Lessons Learned:** 
 * JSX:
     * Browsers do not understand JSX
@@ -51,9 +57,25 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Cannot show JavaScript object inside React component as text
 * Many other differences between JSX and HTML (I.e., React requires `htmlFor` instead of `for` attribute).  Sometimes console warning can help point these out
 
+### **Section 3: Communicating with Props**
+**Completed:** 04/09/2020
 
-## **Project Logs**
-
-### **Project: JSX**
+**Related Project:** [Components](projects/components)
 
 **Lessons Learned:** 
+* Three tenants of components:
+    * Nesting - component can be shown inside another
+    * Re-usability - make components that can be easily reused
+    * Configuration - should be able to customize component templates as necessary
+* Handy CSS library - [Semantic.UI](https://semantic-ui.com/), open source CSS stylesheet link `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">`
+* Another handy library to generate content for projects - [Faker.js](https://github.com/marak/Faker.js/)
+    * Good for initializing data during an app's development when real data is not yet available 
+* Creating reusable and configurable component:
+    * Identify duplicate JSX
+    * Think of description for the block
+    * Create new file to house component, named after descriptor
+    * Make new component configurable with props
+* Props:
+    * System for passing data from parent to child component
+    * Customize/configure child component
+* When passing component as prop into another component (I.e., rendering a component between open and closing tags of parent component), it shows up under children property of props object 
