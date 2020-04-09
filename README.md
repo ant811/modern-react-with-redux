@@ -109,3 +109,34 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Must be JavaScript class
     * Must extend subclass React.Components 
     * Must define a render method that returns JSX
+
+### **Section 5: State in React Components**
+**Completed:** 04/09/2020
+
+**Related Project:** [Seasons](projects/seasons)
+* NOTE: Seasons project still in progress
+
+**Lessons Learned:** 
+* Rules of state:
+    * Only usable in class based components (expect when managed with hooks, covered later in course)
+    * It is a JavaScript object, contains relevant data
+    * Updating state can trigger components to re-render
+    * State must be initialized when component is created
+    * Can only be updated with setState() function
+* constructor() function in Class is particular to JavaScript, not specifically React.  In JS class, the constructor method is always the first function called when an instance of class is created. 
+* super() function in constructor function is referencing the parent's constructor function (in our case, React.Component), since we are re-defining constructor function, we still want to bring over functionality, which is done via super()
+* Our Seasons App walkthrough:
+    * JS loaded by browser
+    * Instance of App component is created
+    * App component's 'constructor' function is called 
+    * State object is created and assigned to this.state property
+    * We call geolocation service
+    * React calls the component's render method
+    * App returns JSX, gets rendered to page as HTML
+    * We get geolocation results
+    * We update our state object with this.state
+    * React sees that state of a component has been updated
+    * React calls render method again
+    * Render method returns updated JSX
+    * React takes JSX and updates content in DOM
+* Conditional rendering - returning different JSX depending on state/props of components
