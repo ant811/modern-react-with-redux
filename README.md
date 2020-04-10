@@ -140,3 +140,39 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Render method returns updated JSX
     * React takes JSX and updates content in DOM
 * Conditional rendering - returning different JSX depending on state/props of components
+
+### **Section 6: Understanding Lifecycle Methods**
+**Completed:** 04/09/2020
+
+**Related Project:** [Seasons](projects/seasons)
+
+**Lessons Learned:** 
+* Component Lifecycle:
+    * Constructor
+    * Render
+        * RESULT: Render returns some JSX, visible in DOM
+    * NOTE: Next three are called during distinct times
+    * ComponentDidMount
+        * Immediately called after component first renders to DOM
+        * Common for initial data loading
+    * ComponentDidUpdate
+        * Automatically called any time component updates itself
+    * CompoentWillUnmount
+        * Commonly used for clean-up after component is taken down
+* Constructor lifecycle method:
+    * Good place to do one-time setup, set initial state
+    * Possible to do data initialization/loading (but better to do this in componentDidMount)
+* Render lifecycle method:
+    * Renders JSX
+* ComponentDidMount lifecycle method:
+    * PERFECT location to do some initial data loading for your component, or to kick-off some outside process like API calls
+    * ONLY gets invoked once
+* ComponentDidUpdate lifecycle method:
+    * Place to do data loading that needs to be done every time a component is updated 
+* ComponentWillUnmount lifecycle method:
+    * Done for cleanup, not as commonly used as it used to be
+* Alternate state initialization - declaring state outside of constructor: `state = { lat: null, errorMessage: '' };`
+    * Babel will build up constructor for you automatically and initialize state 
+* Semantic.UI library provides quick, ease of use styling (E.g., icons, loading screen)
+* Can set default props with `ComponentName.defaultProps = {}`
+* Avoid, if possible, conditional return statements in render().  If each return needs some standardization, it is suboptimal to apply standards to each return statement.  Instead handle conditional returns in helper function.
