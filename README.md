@@ -27,7 +27,7 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Includes many built-in libraries
     * Easy set up for projects
     * Includes babel, webpack, dev server
-    * NOTE: Global install is no longer supported!  Must create projects with `npx create-react-app [name of app]]`
+    * NOTE: Global install is no longer supported!  Must create projects with `npx create-react-app [name of app]`
 * babel:
     * Takes any version of JavaScript and returns ES5 version of code, which can be safely executed by all browsers (not all browsers support newer versions of JavaScript
     * In short, it ensures that any version of JavaScript is backwards compatible
@@ -176,3 +176,62 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * Semantic.UI library provides quick, ease of use styling (E.g., icons, loading screen)
 * Can set default props with `ComponentName.defaultProps = {}`
 * Avoid, if possible, conditional return statements in render().  If each return needs some standardization, it is suboptimal to apply standards to each return statement.  Instead handle conditional returns in helper function.
+
+### **Section 7: Handling User Input with Forms and Events**
+**Completed:** 04/11/2020
+
+**Related Project:** [Pics](projects/pics)
+* NOTE: Pics project still in progress
+
+**Lessons Learned:** 
+* App challenges/tasks:
+    * Get search term from the user
+    * Make API call with search term
+    * Render fetched image to the screen
+* `onChange` event receives callback, and callback receives `event` object.  `event.target.value` contains user input from `input`. 
+* Handy properties that respond to user input (wiring up callbacks or event handlers):
+    * onClick - the user clicks on the target
+    * onChange - any text change in `input` 
+    * onSubmit - `form` submitted  
+* There is a community convention on callback handlers:
+    * on || handle[name of element assigned to event]\[event name\]
+    * EXAMPLE:  `onInputChange`, or `handleInputChange`
+* Controlled vs. Uncontrolled elements:
+    * Controlled:
+        * Critical part: When component re-renders, we take the value from state and assign it to value property of the input
+        * Controlled elements are much preferred
+        * As developers, we don't like to / should not store the single source of truth inside of our HTML elements.  We want to centralize all information inside of our React component on the state property and make sure that the React side of our application is what is driving all data flowing through our application. We should NOT store data inside of the DOM
+        * Handy for setting default text in the input, and for enforcing rules on user input (E.g., ensuring that input text is capitalized with `e.target.value.toUpperCase()`) 
+
+    * Uncontrolled:
+        * In short, when data stored on the DOM, instead of inside React state.
+* Flow of our re-factored, controlled SearchBar component:
+    * User types in the input
+    * Callback invoked
+    * We call setState with new value
+    * Component re-renders
+    * Input is told what its value is (coming from the state)
+* Default behavior of html `form` element: submit, and page refreshes (search term is gone!)
+    * prevent with `e.preventDefault();`
+* Understanding `this`:
+    * What is `this` used for in class?
+    * How is the value of `this` determined by a function?
+    * An instance of our SearchBar component contains properties:
+        * state
+        * render
+        * onFormSubmit
+    * `this` is a reference back to the class instance itself (I.e., why we reference state by `this.state`)
+    * Where our code is current broken is trying to invoke `this.onFormSubmit`
+    * Look at where you call the method - `this` refers to what is left of the dot where function is called
+    * `bind` a method to ensure that the correct value of `this` is accessible:
+        * define the constructor, bind the function within constructor, then overwrite the existing one: E.g., `this.drive = this.drive.bind(this)`
+        * A lot of legacy code is written this way
+    * Newer / contemporary way to solve:
+        * Arrow function!
+        * Note that when `function` keyword is used, it leads to a broken value of `this`, it does not pass on context
+        * Arrow functions bind value of `this` for all code inside of the function
+        * Two ways to solve our `this` error with arrow functions:
+            * 1) define method as arrow function:
+            `onFormSubmit = (e) => {e.preventDefault(console.log(this.state.term)}`
+            * 2) define anonymous arrow function as callback, with event as the argument passed in to method 
+            `onSubmit={(event) => {this.onFormSubmit(event)}}`  
