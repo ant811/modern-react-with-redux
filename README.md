@@ -269,3 +269,16 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Easy way to write async code as if it is sync code
 * Factor configuration outside of App component
 * `axios.create` creates instance of axios client with defaulted properties
+
+### **Section 9: Building Lists of Records**
+**Completed:** 04/11/2020
+
+**Related Project:** [Pics](projects/pics)
+* NOTE: Pics project still in progress
+
+**Lessons Learned:** 
+* Reason for *Warning: Each child in a list should have a unique "key" prop*:
+     * Performance consideration
+     * When re-rendering, React can skip over updating list items with keys that already exist
+     * When list items do not have unique identifiers, React will re-render entire list
+     * These unique keys optimize updating lists
