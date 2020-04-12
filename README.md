@@ -307,3 +307,33 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * We need to ensure that we access the image height *after* it becomes available (I.e., callback on image load)
     * add an event listener that runs callback upon load: `this.imageRef.current.addEventListener('load', cb)`
 * Updating state with confirmed span, then span value will be passed into div style upon re-render
+
+## **Section 11: Let's Test Your React Mastery!**
+**Completed:** 04/12/2020
+
+**Related Project:** [Videos](projects/videos)
+
+**Lessons Learned:** 
+* Generate an access key for YouTube API:
+    * Go to [console.developers.google.com/](console.developers.google.com/)
+    * Create a new project
+    * Click on 'Enable APIs and Services'
+    * Search for 'YouTube Data' API
+    * Click on 'Enable'
+    * Click on 'Credentials'
+    * Choose 'Web Browser JavaScript' and 'Public Data'
+    * Copy API Key!
+    * NOTE: Key is meant to be publically available.  For additional security, click on 'Restrict Key' to manage restrictions (I.e., local only, set IP address, etc.)
+* [YouTube API Search docs](https://developers.google.com/youtube/v3/docs/search/list)
+* In Semantic UI, official styling examples aren't limited to tag/element type, try experimenting using styles on whichever tags/elements you want to use!
+* Make use of a callback (bound to parent) when communicating from child component to parent component
+* Playing a video in `Iframe` tag:
+    * Makes external request
+    * Semantic UI className to embed video player in div: `className="ui embed"`
+    * Pass `iframe` tag its source property`
+* Adblockers produce the remaining console warmings, we can ignore those
+* Semantic UI has its own handy grid system
+    * Span of the browser page is 16 columns, can split up elements by column allocations
+* Set default terms for better user experience
+    * Default search term, loading notification is not helpful
+    * Default video selected (the first element in the array), so when a new search is run, the former selected video is replaced with a relevant video
