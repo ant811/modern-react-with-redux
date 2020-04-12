@@ -235,3 +235,37 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
             `onFormSubmit = (e) => {e.preventDefault(console.log(this.state.term)}`
             * 2) define anonymous arrow function as callback, with event as the argument passed in to method 
             `onSubmit={(event) => {this.onFormSubmit(event)}}`  
+
+### **Section 8: Making API Requests with React**
+**Completed:** 04/11/2020
+
+**Related Project:** [Pics](projects/pics)
+* NOTE: Pics project still in progress
+
+**Lessons Learned:** 
+* [Unsplash API documentation](unsplash.com/developers)
+* Axios vs. Fetch for API requests:
+    * Axios:
+        * 3rd party package
+        * Frequently used in React applications 
+        * Contails a lot of built in nuts and bolts to make syntax easier
+        * Handles requests in predictable fashion
+    * Fetch: 
+        * Singular function built into modern browsers
+        * More basic, lower-level function
+        * A lot of corner cases to consider
+* Time flow of Pics app:
+    * Component renders itself one time w/ no images
+    * `onSearchSubmit` method called
+    * Request made to Unsplash
+    * ...wait...
+    * Request complete
+    * Set image data on state of App component
+    * App component re-renders and shows images
+* Getting data from Axios GET requesting - from within `.then()`, or with async/await
+* async/await:
+    * Place `async` keyword in front of method name / argument list in arrow function definition (E.g., `onSearchSubmit = async (term) => {`...)
+    * Place `await` before async call, assign return to some variable
+    * Easy way to write async code as if it is sync code
+* Factor configuration outside of App component
+* `axios.create` creates instance of axios client with defaulted properties
