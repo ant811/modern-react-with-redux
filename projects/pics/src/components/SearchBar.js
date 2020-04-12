@@ -2,7 +2,7 @@ import React from 'react';
 
 class SearchBar extends React.Component {
   
-  state = { term: 'Hello poppit'};
+  state = { term: '\'ello poppet'};
   
   //this.onFormSubmit = this.onFormSubmit.bind(this);
 

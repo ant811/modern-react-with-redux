@@ -282,3 +282,28 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
      * When re-rendering, React can skip over updating list items with keys that already exist
      * When list items do not have unique identifiers, React will re-render entire list
      * These unique keys optimize updating lists
+
+### **Section 10: Using Ref's for DOM Access**
+**Completed:** 04/12/2020
+
+**Related Project:** [Pics](projects/pics)
+
+**Lessons Learned:** 
+* CSS Grid:
+    * `grid-template-columns` - sets up column layout
+    * `repeat(auto-fill...` dictates how many columns to insert
+    * `...minmax(250px, 1fr));` - each column will be min 250px, 1fr means each column will be evenly sized
+    * `grid-auto-rows` - native CSS grid that can almost standardize the size of each image in column (I.e., scrunching images down to similar sizes).  The issue now is with images overriding one another's space
+    * `grid-row-end: span 3` for example, can allow longer images to take up certain allocated space without overriding neighbors.  This can't work to scale with CCS alone b/c each image may need different span values.  We'll need to write some React code to help determine span value for each image
+* Goal of ImageCard component:
+    * Let ImageCard render itself and its image
+    * Reach into DOM and determine the height of the image
+    * Set the image height on state to get the component to re-render
+    * When re-rendering, assign a span value to `grid-row-end` to make sure that the image takes up necessary space
+* Use React's ref system to reach into the DOM
+    * Gives access to single DOM element
+    * We create refs in the constructor, assign them to instance variables, then pass to a particular JSX element as props
+    * Similar to vanilla JavaScript `document.querySelector('[DOMelement]').[DOMelement property]`
+* We need to ensure that we access the image height *after* it becomes available (I.e., callback on image load)
+    * add an event listener that runs callback upon load: `this.imageRef.current.addEventListener('load', cb)`
+* Updating state with confirmed span, then span value will be passed into div style upon re-render
