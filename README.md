@@ -337,3 +337,30 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * Set default terms for better user experience
     * Default search term, loading notification is not helpful
     * Default video selected (the first element in the array), so when a new search is run, the former selected video is replaced with a relevant video
+
+
+## **Section 12: On We Go...To Redux!**
+**Completed:** 04/13/2020
+
+**Related Project:** [CodePen Redux Example](https://codepen.io/sgrider/pres/oQjBvG)
+
+**Lessons Learned:** 
+* What is Redux?
+    * State management
+    * Makes creating *complex* applications easier
+    * *Not* required to create a React app
+    * Redux library was *not* explicitly designed to work with React
+* Can be very challenging at the beginning, initial high level of difficultly
+* Insurance Analogy of Redux Operations:
+  | | | | | |
+  | ------------- |-------------| -----| ----- | ------ |
+  | Action Creator| Action | Dispatch | Reducers | State |
+   | Person Dropping off Form | The Form | Form Receiver | Departments | Compiled Department Data |
+* *Action Creator* is a function that will create & return a plain JavaScript object.  This plain object is known as an *Action*, which has `action` and `payload` properties. The purpose of an *Action* is to describe some changes that we want to make to the data inside of our application. *Dispatch* takes in Action, makes copies of that object, and passes them along.  *Reducers* are functions that are responsible for taking in an Action w/ data, processing Action, updating data when relevant, and returning data to be centralized in *State*, which is a central repository of data.  React applications can then reach into the Redux state and get access to all updated data. 
+* Reducers should *always* return new array/object, should not modify a passed in data structure
+* Only at small, distinct points will you need to reference Redux library, a lot of setting up is down w/ plain JavaScript
+* A Redux *Store* is an assembly of all Action Creators and Reducers
+* Store object contains references to all reducers, and dispatcher (to pass the action to all reducers)
+* Store object contains `getState()` method to retrieve data
+* *Only* way to modify state in Redux is by dispatching actions
+* Redux helps ensures steady growth of complexity when an application grows
