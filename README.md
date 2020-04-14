@@ -308,7 +308,7 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * add an event listener that runs callback upon load: `this.imageRef.current.addEventListener('load', cb)`
 * Updating state with confirmed span, then span value will be passed into div style upon re-render
 
-## **Section 11: Let's Test Your React Mastery!**
+### **Section 11: Let's Test Your React Mastery!**
 **Completed:** 04/12/2020
 
 **Related Project:** [Videos](projects/videos)
@@ -339,7 +339,7 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Default video selected (the first element in the array), so when a new search is run, the former selected video is replaced with a relevant video
 
 
-## **Section 12: On We Go...To Redux!**
+### **Section 12: On We Go...To Redux!**
 **Completed:** 04/13/2020
 
 **Related Project:** [CodePen Redux Example](https://codepen.io/sgrider/pres/oQjBvG)
@@ -364,3 +364,24 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * Store object contains `getState()` method to retrieve data
 * *Only* way to modify state in Redux is by dispatching actions
 * Redux helps ensures steady growth of complexity when an application grows
+
+### **Section 13: Integrating React with Redux**
+**Completed:** 04/14/2020
+
+**Related Project:** [Songs](projects/songs)
+
+**Lessons Learned:** 
+* React-Redux - a separate library, allows both libraries to communicate
+* Need to install both: `npm install --save redux react-redux`
+* As we will be working with Redux, we will use less stateful React components
+* *Provider* and *Connect* come from React-Redux
+* Pass Redux Store into Provider, which is rendered at the very top of our application hierarchy.  
+* Connect communicates with the Provider tag, NOT through props, but through React Context system (discussed later in the course).  It allows parent and child components to communicate regardless of components in between them.  Connect can pass down 1) data from Provider, and 2) Action Creators, as props into a React component. 
+* Get data from Redux store into a component by configuring `connect()` w/ `mapStateToProps`
+* Why is Action Creator passed into the `connect` method instead of called inside of component?
+    * Redux is not magic!
+    * Redux does not automatically detect action creators being called 
+    * Redux does not automatically detect a function returning an object that is an 'action'
+    * When importing an action creator, we are really just importing regular JavaScript functions
+    * When have to send returned action into dispatch to update store.  The connect function does this heavy lifting
+    * Redux code is heavy on setting up a boilerplate
