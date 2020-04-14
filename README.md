@@ -385,3 +385,52 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * When importing an action creator, we are really just importing regular JavaScript functions
     * When have to send returned action into dispatch to update store.  The connect function does this heavy lifting
     * Redux code is heavy on setting up a boilerplate
+
+### **Section 14: Async Actions with Redux Thunk**
+**Completed:** 04/14/2020
+
+**Related Project:** [Blog](projects/blog)
+* NOTE: Blog project still in progress
+
+**Lessons Learned:** 
+* App goals - Absolutely understand:
+    * Purpose of reducers
+    * Making API requests with Redux
+    * Purpose of `redux-thunk` (Redux middleware)
+* Free source of fake data for testing apps! - `jsonplaceholder.typicode.com/`
+* `redux-thunk` middleware to help us make network requests in a redux application
+* Our `src/index.js` file is a very common Redux & React-Redux boilerplate setup
+* | General Data Loading in Redux | 
+  | ------------- |
+  | 1) Component is rendered to screen     | 
+  | 2) `componentDidMount` gets called    | 
+  | 3) We call Action Creator from `componentDidMount` | 
+  | 4) Action Creator runs API call |
+  | 5) API responds with data |
+  | 6) Action Creator returns an `action` with the fetched data on the `payload` property |
+  | 7) Some reducer sees the action, returns the data from the `payload` |
+  | 8) Because we generated some new state object, redux & react-redux cause our React app to re-render |
+* IN GENERAL:
+    * Components are responsible for fetching the data that they need by calling an action creator (usually from within lifecycle method)
+    * Action Creators are responsible for making API requests (This is where redux-thunk comes into play)
+    * We get fetched data into a component by generating new state in our redux store, then getting that into our component via mapStateToProps
+* PostList.js component is class-based to make use of lifecycle methods like `componentDidMount`
+* Using standard async/await operations inside of action creator breaks rule of Redux!  *ERROR: Actions must be plain objects.  Use customer middleware for async operations*
+* What's wrong with our janky async/await `fetchPosts`()? 
+    * Action creators must return plain JS object
+        * Testing code @ [babel.io](https://babeljs.io/), we see that our transpiled ES2015 code is note actually returning plain JS object.  Initially, we are returning a *request object*
+    * By the time our action gets to a reducer, we won't have fetched our data!
+        * Removing async/await does NOT help, b/c then our action creator returns a promise object!
+* We need to code an async action creator w/ middleware `redux-thunk`, which will take a bit of time before it gets dispatched
+* Flow: Action Creator -> Action -> dispatch -> Middleware -> Reducers -> State
+* Middlewares in Redux:
+    * Function that gets called w/ every action we dispatch
+    * Has the ability to STOP / MODIFY, or otherwise impact actions
+    * Tons of open source middleware exists
+    * Most popular deals with async action creators
+    * We will use redux-thunk
+* Rules change with redux-thunk - Action creators can return 1) plain JS action object, or 2) a function (which thunk will call for you)
+* When Action Creator returns a function:
+    * Thunk calls function w/ dispatch and getState functions
+    * When the request is complete, dispatch action manually
+* Source code of [redux-thunk](https://github.com/reduxjs/redux-thunk)
