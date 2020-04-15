@@ -462,3 +462,52 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * NOTE Lecture 186 - Extract anything that is going to do some computation on our redux state, and the props coming into component, within the `mapStateToProps` function
 * Memoize API for efficiency (memoize function from lodash library).  *HOWEVER* - not a good real-world example, as you could only query each user ONCE, regardless of whether data has changed.  
 * Consolidate action creators into ONE that gets called, map over the result of getPosts with getUsers
+
+### **Section 16: Navigation with React Router**
+**Completed:** 04/15/2020
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* Different pages on the screen are dictated by a URL ending 
+* We are going to build authentication into our component
+* *Stream* and *channel* will be used interchangeably when discussing our Twitch-like app
+* Logging in will 1) expand user's capabilities to edit, create, delete streams, and 2) change landing page layout
+* We will have several mini-projects inside of the project folder streams
+* App challenges:
+    * Need to be able to navigate around separate pages in our app (we will do this in react-router)
+    * Need to allow a user to login and logout (Will use google O Auth)
+    * Need to handle forms in redux 
+    * Need to master CRUD operations in React/Redux (what to do with records: Create, Read, Update, Destroy)
+    * Errors will likely occur!  Need good error handling system
+* Install `react-router-dom`, not `react-router`(included with react-router-dom)
+* React-Router only cares about URL after domain and port
+* When validating paths, react-router will check to see if the URL ending 'contains' the route.  `exact` property helps enforce strictness.  E.g., routes `/` and `/pagetwo` will both spawn unless `exact` property is added.  Note that adding `exact` without specifying value is the same as `exact={true}`
+* How to NOT navigate - HTML anchor tag updating URL
+* When you click on anchor tag:
+    * Browser makes a request to localhost:3000
+    * Dev server responds with index.html
+    * Browser receives index.html and *dumps* former HTM file, *including all React/Redux stored data*
+    * index.html downloads and executes JS scripts
+    * App starts up
+* Instead, use the react-router `Link` component.  Note that Link tags will still show up as an anchor tag when inspecting rendered DOM
+* What we want:
+    * Click on the Link tag
+    * React-Router prevents the browser from navigating to the new page and fetching new index.html
+    * URL still changes
+    * 'History' sees updated URL, takes URL and sends it to BrowserRouter
+    * BrowserRouter communicates the URL to the Route component
+    * NOTE: The idea of NOT making additional requests for a separate HTML document when clicking on a link is where the term *Single Page Application* comes from: ONLY loading ONE HTML document.  Users aren't really visiting different pages, we are just hiding and showing different components
+* Lecture 205: Optional, helpful for use of React-Router when trying to deploy an application:
+    * In addition to BrowserRouter, there are two other types of routers, the only difference is what part of the URL that they look at when deciding what content to show on the screen
+    * BrowserRouter - looks at everything after top-level domain (TLD) or port
+    * HashRouter - Uses everything after `#` in the path
+    * MemoryRouter - Doesn't use URL to track navigation
+    * BrowserRouter is the most difficult to deploy
+    * Note what you are doing when making use of the Create-React-App development server - when content for route `/pagetwo` can't be identified, it just serves up index.html (whereas traditional server would just return 404 error if it can't find anything).  Important to note this, at this time in our application, all the routes are in client-side JS code (not defined server routes)
+    * HashRouter tells the server to ignore everything after the hash, which will just instead serve up index.html
+    * Components outside of BrowserRouter will always be shown (E.g., Header component in our app)
+    * Note: Semantic UI styling in Header component comes from Menu section
+    * HOWEVER - the issue arises when trying to use Links outside of a Router like we are trying to do with our persistent Header component.  We'll need to put the Header component within BrowserRouter
+
