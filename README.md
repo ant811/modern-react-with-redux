@@ -434,3 +434,31 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Thunk calls function w/ dispatch and getState functions
     * When the request is complete, dispatch action manually
 * Source code of [redux-thunk](https://github.com/reduxjs/redux-thunk)
+
+### **Section 15: Redux Store Design**
+**Completed:** 04/14/2020
+
+**Related Project:** [Blog](projects/blog)
+
+**Lessons Learned:** 
+* | Rules of Reducers | 
+  | ------------- |
+  | 1) Must return *any* value other than `undefined`    | 
+  | 2) Produces `state`, or data to be used inside of your app, using *only* previous state and the action (reducers are pure)| 
+  | 3) Must *not* reach out of itself to decide what value to return | 
+  | 4) Must *not* mutate its input `state` argument |
+* The first time reducer called, during initialization, it passed undefined as the first argument, and returns v1 of state.
+* The next time reducer is called, it passes v1 of the state as the first argument and returns v2 of the state (and so on...)
+* Final rule 4 is misleading and/or...wrong...?
+    * Mainly need to worry about mutating an existing array or object
+    * Since strings/numbers are immutable, when you 'change' a string/number, you are producing a new one, and not altering original
+    * J/k!  You can totally mutate it!
+    * It is easier to tell beginners 'Don't' mutate than to tell them when they can/can't
+* There is a corner case where mutation will cause issues:
+    * To be clear, in this course we will *NOT* be mutating the state
+    * Reviewing redux source code, we see that combineReducers checks for equality between former state and new state.  If redux does not detect that newState is different than the former state, then there will be no new state, the app won't re-render, we won't see changes to the app!
+* Lecture 178 has many examples of good vs. bad state updates regarding arrays and objects (I.e., map, filter, spread operators, all instead of operating in input array)  
+* Common to use switch statements in reducers 
+* NOTE Lecture 186 - Extract anything that is going to do some computation on our redux state, and the props coming into component, within the `mapStateToProps` function
+* Memoize API for efficiency (memoize function from lodash library).  *HOWEVER* - not a good real-world example, as you could only query each user ONCE, regardless of whether data has changed.  
+* Consolidate action creators into ONE that gets called, map over the result of getPosts with getUsers
