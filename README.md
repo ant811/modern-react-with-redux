@@ -511,3 +511,31 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Note: Semantic UI styling in Header component comes from Menu section
     * HOWEVER - the issue arises when trying to use Links outside of a Router like we are trying to do with our persistent Header component.  We'll need to put the Header component within BrowserRouter
 
+### **Section 17: Handling Authentication in React**
+**Completed:** 04/15/2020
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* OAuth Authentication:
+    * Use authentication w/ outside service provider (Facebook, Google, LinkedIn, etc.)
+    * User authorizes our app to access their information
+    * Outside provider tells us about the user
+    * We are trusting the outside provider to correctly handle authentication of a user
+    * OAuth can be used for 1) user identification in our app, and 2) our app making actions on behalf of the user (we won’t do #2 in this application)
+    * A scope is permission for access to information.  We will only care about email scope
+* We will work with OAuth for JS Browser Apps:
+    * OAuth for servers:
+        * Usually used when your app needs access to user data when they *are not* logged in
+        * Difficult to set up, need a lot of info from the user
+    * OAuth for JS Browser :
+        * Usually used when your app needs access to user data when they are logged in
+        * Easy to set up thanks to Google JS's library to automate the flow
+* Google JS APIs not available to download via npm, need to add script to HTML Head element: `<script src="https://apis.google.com/js/api.js"></script>`
+* Google's `gapi` library used to 1) interact with OAuth flow and 2) other types of Google services
+* [gapi JavaScript Library docs](https://developers.google.com/identity/sign-in/web/reference)
+* Our Redux architecture for this project won't follow normal conventions:
+    * Our Google Auth component will communicate with API Gapi Auth2 instead of our action creators.
+    * This is to isolate the Google Auth functionality to one component  
+    * Typically, ONLY the Action Creators should be responsible for changing state
