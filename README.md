@@ -554,3 +554,18 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * You can initiate debug session with dev tools (which makes data persistent across page refreshes).  
 * to initiate: `localhost:3000?debug_session=<some string>`
 * Can create different sessions to serve as debugging checkpoints
+
+### **Section 19: Handling Forms with Redux Form**
+**Completed:** 04/16/2020
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* Redux-Form can be tricky, but it comes with a lot of built-in functionality: reducers, action creators, mapStateToProps
+* [Redux-Form docs](https://redux-form.com/), examples section most useful, Wizard Form is handy, this app will make use of Sync Validation form 
+* Refactoring StreamCreate to a class-based component, as there will be many helper functions, and a class helps organize code (E.g., helpers as methods)
+* The *function* `reduxForm` has same functionality as `connect` in `react-redux`
+* The `<Field />` component can be ANY type of input: text field, checkbox, radio button, drop-down, anything that solicits input from the user.  BUT these components themselves do not know how to show text field, checkbox, etc., they individually are not responsible for getting something to show up on the screen
+* Our validation function returns an empty object when input is valid (as per our rules) 
+* Semantic UI by default hides error messages - we will add CCS to render messages to DOM
