@@ -539,3 +539,18 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Our Google Auth component will communicate with API Gapi Auth2 instead of our action creators.
     * This is to isolate the Google Auth functionality to one component  
     * Typically, ONLY the Action Creators should be responsible for changing state
+
+### **Section 18: Redux Dev Tools**
+**Completed:** 04/15/2020
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* Note that forms in Redux are tricky
+* Redux dev tools for peaking inside store:[github.com/zalmoxisus/redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension)
+* VERY handle interface, shows current and former states and received actions, able to re-render app with former states
+* Airbnb uses Redux, can use dev tools to see what states they manage
+* You can initiate debug session with dev tools (which makes data persistent across page refreshes).  
+* to initiate: `localhost:3000?debug_session=<some string>`
+* Can create different sessions to serve as debugging checkpoints
