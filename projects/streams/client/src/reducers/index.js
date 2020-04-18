@@ -5,9 +5,11 @@ import { combineReducers } from 'redux';
 // an export 
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './authReducer';
+import streamReducer from './streamReducer';
 
 export default combineReducers({
   auth: authReducer,
   // redux-form reducer MUST be wired to key of `form`
-  form: formReducer
+  form: formReducer,
+  streams: streamReducer
 });

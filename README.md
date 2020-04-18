@@ -569,3 +569,60 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * The `<Field />` component can be ANY type of input: text field, checkbox, radio button, drop-down, anything that solicits input from the user.  BUT these components themselves do not know how to show text field, checkbox, etc., they individually are not responsible for getting something to show up on the screen
 * Our validation function returns an empty object when input is valid (as per our rules) 
 * Semantic UI by default hides error messages - we will add CCS to render messages to DOM
+
+### **Section 20: REST-Based React Apps**
+**Completed:** 04/17/2020
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* Installing [json-server](https://www.npmjs.com/package/json-server) for mocking REST API requests.  We are using `json-server` because of its strict adherence to RESTful conventions
+* REST conventions are 
+    * standardized system for designing APIs
+    * standardized systems for routes and request methods, used to operate on different record actions: GET one, GET all, POST (create), PUT/PATCH (update), DELETE
+* Creating a static database to interact with `json-server`
+* Lecture 245: Note that action creator `createStream` invokes `dispatch` and passes type and payload b/c it is NOT a plain object (see lecture questions for a link to the former lecture that covers this topic)
+* For ease of updates and access, we will store data in the state in an object, and not an array
+* Key interpolation: ES2015 syntax for key assignment.  E.g., `{state..., [action.payload.id]: action.payload }`
+* lodash `mapKeys` method accepts array [from API] and returns object {our new state}
+* Getting userId from inside action creator - When we return a function from an action creator, the function gets automatically called by `redux-thunk` with two arguments:
+    * dispatch
+    * getState
+* Intentional navigation - the user clicks to a new page
+* Programmatic navigation - code forcibly navigates the user
+* How to handle programmatic navigation:
+    * User submits a form
+    * We make a request to backend API to create the stream
+    * ...time passes...
+    * API responds with success or error
+    * We either show an error, or navigate them back to list of streams
+* How to enact programmatic navigation in React-Router
+    * Not always easy. 
+    * BroswerRouter creates History object, which keeps track of the address in the address bar of the browser
+    * History object can also change the address bar
+    * Easy enough to trigger page change within a component, but we are trying to trigger page change within the *action-creator*, triggering page change within anything other than a react component is tricky
+    * *Just* getting access to history object is a pain
+    * So...we are going to create our own history object!
+    * And...instead of using BroswerRoute, we are going to create a plain Router
+    * `history` module was installed as a dependency of react-router-dom
+* Passing along selected stream with:
+    * Selection reducer?, or
+    * URL-based selection? <-- this is preferred and more beneficial
+* REMINDER:  mapStateToProps can accept two arguments (*Lecture 266*):
+    * First is always state
+    * OPTION: Second is `ownProps`, which is how we can access a component's props outside of the component definition
+* Lecture 267: If we refresh the edit page, or directly visit the edit page, Redux state is empty! (Right now, the state only loads with all streams at StreamList component on route '/')
+    * BIG RULE:  With React-Router, EVERY component needs to be designed to work in isolation (I.e., fetch its own data)
+    * We can't assume that every component will have access to data that might have been previously loaded
+* Lecture 269 - discussion about making re-usable components
+    * Generalized StreamForm component
+    * StreamForm will be used by both StreamCreate and StreamEdit
+* Redux-form accepts optional parameter initialValues
+* StreamEdit returns object with updated AND current values (i.e., return object also includes user id and id num of stream)
+    * We ONLY want to see return object with values that have been changed
+    * Fix with only passing in title and description as the initial value (using lodash `pick` method)
+* PUT vs. PATCH RESTful requests:
+    * PUT updates ALL properties (if the property is MIA, it gets removed UNLESS it is default property like our `id` property in our json-server fake db)
+    * PATCH only updates some properties (those that are marked for update)
+    
