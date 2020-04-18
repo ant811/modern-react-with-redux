@@ -652,3 +652,14 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * React fragment - like an invisible element, it can wrap sibling elements, but it doesn't produce any HTML itself
     * empty tag: `<> </>`, or 
     * fragment component `<React.Fragment> <React.Fragment/>`<-- this prevents linters from tagging an error, as some might interpret empty tags as invalid syntax
+
+### **Section 22: Implementing Streaming Video**
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* Prevent StreamCreate @ '/streams/new ' & StreamShow @ '/streams/:id' from both rendering at the same time:
+    * More React Router trickiness
+    * Import component `Switch` from `react-router-dom`
+* *NOTE: Basics of Streams project is complete.  RTMP NodeMediaServer set-up is optional.  I am committing this project at this point to have a reference point to a React-Redux & React-Router CRUD application boilerplate.  After committing, I continue with Lesson 22 and complete the RTMP NodeMediaServer portion*
