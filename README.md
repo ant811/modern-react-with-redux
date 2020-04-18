@@ -654,12 +654,25 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * fragment component `<React.Fragment> <React.Fragment/>`<-- this prevents linters from tagging an error, as some might interpret empty tags as invalid syntax
 
 ### **Section 22: Implementing Streaming Video**
+**Completed:** 04/18/2020
 
 **Related Project:** [Streams](projects/streams)
-* NOTE: Streams project still in progress
 
 **Lessons Learned:** 
 * Prevent StreamCreate @ '/streams/new ' & StreamShow @ '/streams/:id' from both rendering at the same time:
     * More React Router trickiness
     * Import component `Switch` from `react-router-dom`
 * *NOTE: Basics of Streams project is complete.  RTMP NodeMediaServer set-up is optional.  I am committing this project at this point to have a reference point to a React-Redux & React-Router CRUD application boilerplate.  After committing, I continue with Lesson 22 and complete the RTMP NodeMediaServer portion*
+* [RTMP GitHub documentation](https://github.com/illuspas/Node-Media-Server)
+    * A node.js implementation of an RTMP server
+    * We will use this to stream a video from OBS (open broadcaster)
+    * Makes videos available for consumption on PORT 8000
+    * Accepts traffic on PORT 1935
+* [OBS Software docs](https://obsproject.com/)
+* [Flash player docs](https://www.npmjs.com/package/flv.js)
+    * old school, but perfect for the scope of our project
+    * Akin to Axios, it reaches to a server to get content
+* Lecture 296 - We only want to attempt to set up video plater after we know that the video stream has been fetched
+* Cleanup with `componentwillUnmount`
+    * We need to tell our video player server to stop streaming
+    * Wind up any resources that our component may have created
