@@ -625,4 +625,30 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * PUT vs. PATCH RESTful requests:
     * PUT updates ALL properties (if the property is MIA, it gets removed UNLESS it is default property like our `id` property in our json-server fake db)
     * PATCH only updates some properties (those that are marked for update)
-    
+
+### **Section 21: Using React Portals**
+**Completed:** 04/18/2020
+
+**Related Project:** [Streams](projects/streams)
+* NOTE: Streams project still in progress
+
+**Lessons Learned:** 
+* When a user navigates to the delete page, we are going to show a *modal* window to them.
+    * A modal window prompts the user to take some action (I.e., 'Are you sure you want to delete this?')
+    * Nothing else the user can do until they resolve the action
+* Creating modals with React is surprisingly challenging
+* Normally, all components are rested within div with child of `root`
+* We will use portals to get around the requirement of having to nest within `root` div
+* Modal is designed to 'sit on top of, obscure' elements/components behind it
+* For an example, we will write modal example in vanilla HTML
+* Our HTML modal will have two divs:
+    * Outer div will be greyed out background
+    * Inner div will be the content of modal
+* Vanilla CSS rule `z-index` controls which element gets rendered on top of the other, assigned integer values
+* We are creating a 'stacking context', using `position: relative`, and `z-index: 0`.  Stacking context creates a new way of comparing sibling elements, compare their z-index, and not a nested element's z-index, note that later elements 'win', in our case sidebar element with the same z-index of 0
+* With portals, we don't have to stick with the normal component hierarchy, portals allow us to render some element, but not as a direct child
+* Returning to React to build our modal, we will create new div in the HTML file that is a sibling to root
+* Lecture 280: Fixing styling issues when passing JSX w/ Semantic UI stylings, two buttons wrapped in one div, as a prop to be rendered...I am not having these styling issues though...Using React fragment to fix the issue
+* React fragment - like an invisible element, it can wrap sibling elements, but it doesn't produce any HTML itself
+    * empty tag: `<> </>`, or 
+    * fragment component `<React.Fragment> <React.Fragment/>`<-- this prevents linters from tagging an error, as some might interpret empty tags as invalid syntax
