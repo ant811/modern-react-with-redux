@@ -676,3 +676,49 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * Cleanup with `componentwillUnmount`
     * We need to tell our video player server to stop streaming
     * Wind up any resources that our component may have created
+
+### **Section 23: The Context System with React**
+**Completed:** 04/18/2020
+
+**Related Project:** [Translate](projects/translate)
+
+**Lessons Learned:** 
+* Props system vs. context system
+    * Props: Gets data from a parent component to a *direct* child component
+    * Context: Gets data from a parent component to *any* nested child component
+* With Context, do we still need Redux?
+    * Yes - Context is just for communicating data, just about props
+* Communicate via a Context Object
+* The official React documentation is not always clear on how we get info into, and from, the Context object
+* Two ways to pass data in Context:
+    * default value --> Context Object --> this.context in child component
+    * Provider component --> Context Object --> Consumer component in child component
+* Different reasons why one might use one over the other
+* Create default value by directly passing it into context call
+* Component needs `contextType` to connect to context
+    * MUST be called `contextType` else it won't work
+    * defined with `static`:
+        * `static contextType = [name of imported context]`
+        * `static keyword` - adds the property to the class itself
+        * Same as `Button.contextType = [name of imported context]`
+* Default values can pass along, but these can't be changed.  We need Provider and Consumer components
+* We are not bound to using React's state management system to update context (however, that is often the case)
+* | Re-render flow: | 
+  | ------------- |
+  | 1) Application loads  | 
+  | 2) We create a context object | 
+  | 3) App component gets rendered, creates a `Provider` that wraps UserCreate component | 
+  | 4) Provider updates the value of the context object to `this.state.language` |
+  | 5) `Field` and `Button` reach into Context object and see the value from `this.state.language`  |
+  | 6) `Field` and `Button` render appropriate text to browser | 
+* 3 through 6 get repeated *anytime* a user clicks on flag and updates state
+* HUGE 'gotcha', not well explained in official React Context docs:
+   * Step 3) App component gets rendered, creates a `Provider` that wraps UserCreate component
+   * Each separate use of `LanuageContext.Provider` creates a new, separate 'pipe' of information
+* Consumer component:
+   * Like Provider, automatically created for us when we create a new context object
+   * Child within Consumer is always a function, which always gets called with whatever the value is in the Context (value shows up as the first argument)
+* Why would we use Consumer component to access Context instead of using this.context?
+    * Getting info out of multiple context objects inside of a single component
+    * this.context is limiting to one context per component
+    * Both Context Providers wrapped around UserCreate (doesn't matter which is inner/outer)
