@@ -681,6 +681,7 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 **Completed:** 04/18/2020
 
 **Related Project:** [Translate](projects/translate)
+* NOTE: Translate project still in progress
 
 **Lessons Learned:** 
 * Props system vs. context system
@@ -722,3 +723,32 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
     * Getting info out of multiple context objects inside of a single component
     * this.context is limiting to one context per component
     * Both Context Providers wrapped around UserCreate (doesn't matter which is inner/outer)
+
+### **Section 24: Replacing Redux with Context**
+**Completed:** 04/19/2020
+
+**Related Project:** [Translate](projects/translate)
+
+**Lessons Learned:** 
+* Redux Vs. Context
+* Context is *not* strictly speaking an equivalent or replacement for Redux
+* | Redux | Context |
+  | ------------- | ------------- |
+  | Distributes data to various components |  Distributes data to various components |
+  | Centralizes data in a data store |  |
+  | Provides a mechanism for changing data in the store | |
+* If you want to use Context in place of Redux:
+    * (Not an issue with Context) We need to be able to get data to any component in our hierarchy
+    * (Can be an issue with Context) We need to be able to separate our view logic from business logic (I.e., avoid components that both return JSX component and manage state)
+    * (Can be an issue with Context) We need to be able to split up business logic (I.e., not have a single file with thousands of lines of code)
+* Refactor to LanguageContext.js:
+    * Creates language context (not new)
+    * Houses state and setState callback
+    * Note that we need to export LanguageStore AND Context
+* Reasons to continue to use Redux:
+    * Excellent documentation
+    * Well-known design patterns
+    * Tremendous amount of open source libraries 
+* However, with Context:
+    * No need for an extra library (main big benefit)
+    * Challenges: Hard to build a 'store' component with cross-cutting concerns (E.g., consider how action creators can easily access Redux store, our faux Context store would need a lot more supporting code to handle the same level of complexity)
