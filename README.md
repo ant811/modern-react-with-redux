@@ -752,3 +752,36 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * However, with Context:
     * No need for an extra library (main big benefit)
     * Challenges: Hard to build a 'store' component with cross-cutting concerns (E.g., consider how action creators can easily access Redux store, our faux Context store would need a lot more supporting code to handle the same level of complexity)
+
+### **Section 25: Hooks with Functional Components**
+**Completed:** 04/20/2020
+
+**Related Project:** [Hooks-simple](projects/hooks-simple)
+
+**Lessons Learned:** 
+* With Hooks, we can introduce State and Lifecycle methods to function based components 
+* Hooks make it really easy to share logic between component
+* Hooks make it easy to share and re-use business logic between different components
+* Hooks help solve issues regarding code re-use inside of typical React projects
+* Real/main purpose - make it easy to share logic 
+
+  | Hook Name | Goal |
+  | ------------- | ------- |
+  | `useState` | Allow a functional component to use component-level state |
+  | `useEffect` | Allow a functional component to use lifecycle methods |
+  | `useContext` | Allow a functional component to use context system |
+  | `useReducer` | Allow a functional component to store data using a reducer |
+* `usestate` returns array with 1) current state, and 2) function used to update state.  We typically store individual values.  
+    * When we call update function, it causes the component to re-render
+* App will work with [JSON Placeholder API](http://jsonplaceholder.typicode.com/)
+* Using `setState` method in both componentDidMount and componentDidUpdate can cause endless spamming of API
+    * Component mounts, the state is set, triggering componentDidUpdate, updating state, triggering componentDidUpdate again, etc.
+    * Use `prevProps` object to decide whether or not currently selected resource has changed 
+    * Takeaway - be careful with class-based lifecycle methods, as they can have repetitive logic inside of them
+* `useEffect` - when the value inside of the array in the second argument does NOT change, then the first argument callback does not get called
+    * When a non-array gets passed in (E.g., an empty object), the callback gets calls every time (same endless API call issue)
+    * Passing in an empty array is like using `useEffect` as componentDidMount, as it will only ever get called once
+    * What about an object with the same key/value pairs? E.g., `[{color: 'red'}]` and `[{color: 'red'}]` will both get called as they are not referencing the same object in memory, acting in the same manner as reducers in redux
+* Lecture 330 - example of how to use async calls within `useEffect` - instead of passing in a helper function that handles async calls, pass in an IIFE 
+* Lectures 332, 333 - How to extract all hook functionality into a single separate component for re-usability 
+* New UserList component was quickly put together using useResource function for API calls
