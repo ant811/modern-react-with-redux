@@ -785,3 +785,13 @@ This repository tracks my progress and lessons learned on the Udemy course Moder
 * Lecture 330 - example of how to use async calls within `useEffect` - instead of passing in a helper function that handles async calls, pass in an IIFE 
 * Lectures 332, 333 - How to extract all hook functionality into a single separate component for re-usability 
 * New UserList component was quickly put together using useResource function for API calls
+
+### **Section 26: More Fun with Hooks**
+**Completed:** 04/21/2020
+
+**Related Project:** [Season-hooks](projects/season-hooks)
+
+**Lessons Learned:** 
+* Refactoring Season app
+* For componentDidMount in hooks, reminder: Pass in an empty array as the second argument for `useEffect`
+* Isolate all hook logic (which, with this app, doesn't require any user input) into separate file `useLocation.js`
